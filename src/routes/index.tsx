@@ -92,13 +92,10 @@ function Nav() {
   return (
     <header className={`fixed top-0 inset-x-0 z-40 transition-all duration-500 ${scrolled ? "bg-ink/85 backdrop-blur-md border-b border-border" : "bg-transparent"}`}>
       <div className="container-x flex items-center justify-between h-16 md:h-20">
-        <a href="#top" className="flex items-center gap-2.5 min-w-0">
-          <Logo className="h-9 w-9 shrink-0" />
-          <div className="leading-tight min-w-0">
-            <div className="font-display text-lg md:text-xl tracking-wider text-foreground truncate">DEN CULTURE</div>
-            <div className="text-[10px] tracking-[0.25em] text-gold/80 uppercase">Café</div>
-          </div>
+        <a href="#top" className="flex items-center min-w-0">
+          <Logo className="h-10 md:h-12 w-auto shrink-0" />
         </a>
+
         <nav className="hidden md:flex items-center gap-8">
           {links.map((l) => (
             <a key={l.href} href={l.href} className="text-sm text-muted-foreground hover:text-gold transition-colors">{l.label}</a>
