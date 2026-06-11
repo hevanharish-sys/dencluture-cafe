@@ -186,11 +186,11 @@ function Hero() {
           <span className="h-px w-8 bg-gold/60" />
         </motion.div>
 
-        <motion.h1 variants={fadeUp} className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-balance leading-[1.05]">
+        <motion.h1 variants={fadeUp} className="display-1 text-balance">
           Where Coffee <span className="italic text-gold">Meets</span> Culture
         </motion.h1>
 
-        <motion.p variants={fadeUp} className="mt-6 max-w-xl mx-auto text-base md:text-lg text-muted-foreground text-balance">
+        <motion.p variants={fadeUp} className="lead mt-6 max-w-xl mx-auto text-balance">
           A destination designed for conversations, comfort, coffee, and community.
         </motion.p>
 
@@ -229,7 +229,7 @@ function Section({ id, eyebrow, children, className = "" }: { id?: string; eyebr
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="inline-flex items-center gap-3 text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
+    <div className="inline-flex items-center gap-3 eyebrow text-gold mb-6">
       <span className="h-px w-8 bg-gold/60" /> {children}
     </div>
   );
@@ -243,7 +243,7 @@ function About() {
           initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={fadeUp}
           className="lg:col-span-6"
         >
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1] text-balance">
+          <h2 className="display-2 text-balance">
             More Than <span className="italic text-gold">Just</span> A Café
           </h2>
           <div className="mt-6 gold-divider w-24" />
@@ -322,7 +322,7 @@ function Experience() {
   return (
     <Section id="experience" eyebrow="The Den Experience" className="bg-card/40 border-y border-border">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-balance max-w-2xl">
+        <h2 className="display-2 text-balance max-w-2xl">
           Every detail, <span className="italic text-gold">considered.</span>
         </h2>
         <p className="text-muted-foreground max-w-md">
@@ -339,7 +339,7 @@ function Experience() {
             className="group bg-background p-8 md:p-10 hover:bg-card transition-colors"
           >
             <f.icon className="h-7 w-7 text-gold mb-6 transition-transform duration-500 group-hover:-translate-y-1" strokeWidth={1.25} />
-            <h3 className="font-display text-2xl mb-3">{f.title}</h3>
+            <h3 className="display-3 mb-3">{f.title}</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
           </motion.div>
         ))}
@@ -381,7 +381,7 @@ function Gallery() {
   return (
     <Section id="gallery" eyebrow="Gallery">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-balance">
+        <h2 className="display-2 text-balance">
           Moments at <span className="italic text-gold">the Den.</span>
         </h2>
         <p className="text-muted-foreground max-w-md">Tap any image to view full size.</p>
@@ -456,7 +456,7 @@ function Atmosphere() {
           <Eyebrow>Atmosphere</Eyebrow>
           <motion.h2
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
-            className="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1] text-balance"
+            className="display-2 text-balance"
           >
             Crafted to <span className="italic text-gold">linger</span> over.
           </motion.h2>
@@ -494,7 +494,7 @@ function Reviews() {
   return (
     <Section id="reviews" eyebrow="Guest Reviews" className="bg-card/40 border-y border-border">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-balance">
+        <h2 className="display-2 text-balance">
           Words from our <span className="italic text-gold">guests.</span>
         </h2>
         <div className="flex items-center gap-3 text-sm text-muted-foreground">
@@ -538,7 +538,7 @@ function Visit() {
     <Section id="visit" eyebrow="Visit Us">
       <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
         <div className="lg:col-span-5">
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1] text-balance">
+          <h2 className="display-2 text-balance">
             Come <span className="italic text-gold">find</span> us.
           </h2>
           <div className="mt-6 gold-divider w-24" />
