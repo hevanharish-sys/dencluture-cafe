@@ -92,9 +92,11 @@ function Nav() {
   return (
     <header className={`fixed top-0 inset-x-0 z-40 transition-all duration-500 ${scrolled ? "bg-ink/85 backdrop-blur-md border-b border-border" : "bg-transparent"}`}>
       <div className="container-x flex items-center justify-between h-16 md:h-20">
-        <a href="#top" className="flex items-center min-w-0">
-          <Logo className="h-10 md:h-12 w-auto shrink-0" />
+        <a href="#top" className="flex items-center gap-3 min-w-0">
+          <Logo size={44} />
+          <span className="font-display text-base md:text-lg tracking-[0.18em] uppercase text-foreground/90 hidden sm:inline">Den Culture</span>
         </a>
+
 
         <nav className="hidden md:flex items-center gap-8">
           {links.map((l) => (
@@ -133,15 +135,31 @@ function Nav() {
   );
 }
 
-function Logo({ className = "" }: { className?: string }) {
+function Logo({ size = 48, variant = "default" }: { size?: number; variant?: "default" | "hero" }) {
+  const ring = variant === "hero"
+    ? "ring-1 ring-gold/50 shadow-[0_0_60px_-10px_oklch(0.8_0.13_82/0.55)]"
+    : "ring-1 ring-gold/40";
   return (
-    <img
-      src={logoAsset.url}
-      alt="Den Culture Café logo"
-      className={`object-contain ${className}`}
-    />
+    <span
+      aria-label="Den Culture Café"
+      style={{ width: size, height: size }}
+      className={`relative inline-grid place-items-center rounded-full bg-ink ${ring} overflow-hidden shrink-0`}
+    >
+      <span className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_30%,oklch(0.22_0.01_60),oklch(0.09_0.004_60))]" />
+      <img
+        src={logoAsset.url}
+        alt="Den Culture Café logo"
+        loading="eager"
+        decoding="async"
+        className="relative w-[78%] h-[78%] object-contain"
+      />
+      {variant === "hero" && (
+        <span className="absolute inset-[-1px] rounded-full ring-1 ring-gold/20" />
+      )}
+    </span>
   );
 }
+
 
 
 /* ---------------- HERO ---------------- */
@@ -158,7 +176,7 @@ function Hero() {
         className="relative z-10 container-x text-center py-32"
       >
         <motion.div variants={fadeUp} className="mx-auto mb-8 flex flex-col items-center gap-4">
-          <Logo className="h-24 md:h-28 w-auto" />
+          <Logo size={120} variant="hero" />
         </motion.div>
 
         <motion.div variants={fadeUp} className="inline-flex items-center gap-2 text-[11px] md:text-xs tracking-[0.3em] uppercase text-gold/90 mb-6">
@@ -168,11 +186,11 @@ function Hero() {
           <span className="h-px w-8 bg-gold/60" />
         </motion.div>
 
-        <motion.h1 variants={fadeUp} className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-balance leading-[1.05]">
+        <motion.h1 variants={fadeUp} className="display-1 text-balance">
           Where Coffee <span className="italic text-gold">Meets</span> Culture
         </motion.h1>
 
-        <motion.p variants={fadeUp} className="mt-6 max-w-xl mx-auto text-base md:text-lg text-muted-foreground text-balance">
+        <motion.p variants={fadeUp} className="lead mt-6 max-w-xl mx-auto text-balance">
           A destination designed for conversations, comfort, coffee, and community.
         </motion.p>
 
@@ -211,7 +229,7 @@ function Section({ id, eyebrow, children, className = "" }: { id?: string; eyebr
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="inline-flex items-center gap-3 text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
+    <div className="inline-flex items-center gap-3 eyebrow text-gold mb-6">
       <span className="h-px w-8 bg-gold/60" /> {children}
     </div>
   );
@@ -225,7 +243,7 @@ function About() {
           initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={fadeUp}
           className="lg:col-span-6"
         >
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1] text-balance">
+          <h2 className="display-2 text-balance">
             More Than <span className="italic text-gold">Just</span> A Café
           </h2>
           <div className="mt-6 gold-divider w-24" />
@@ -304,7 +322,7 @@ function Experience() {
   return (
     <Section id="experience" eyebrow="The Den Experience" className="bg-card/40 border-y border-border">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-balance max-w-2xl">
+        <h2 className="display-2 text-balance max-w-2xl">
           Every detail, <span className="italic text-gold">considered.</span>
         </h2>
         <p className="text-muted-foreground max-w-md">
@@ -321,7 +339,7 @@ function Experience() {
             className="group bg-background p-8 md:p-10 hover:bg-card transition-colors"
           >
             <f.icon className="h-7 w-7 text-gold mb-6 transition-transform duration-500 group-hover:-translate-y-1" strokeWidth={1.25} />
-            <h3 className="font-display text-2xl mb-3">{f.title}</h3>
+            <h3 className="display-3 mb-3">{f.title}</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
           </motion.div>
         ))}
@@ -363,7 +381,7 @@ function Gallery() {
   return (
     <Section id="gallery" eyebrow="Gallery">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-balance">
+        <h2 className="display-2 text-balance">
           Moments at <span className="italic text-gold">the Den.</span>
         </h2>
         <p className="text-muted-foreground max-w-md">Tap any image to view full size.</p>
@@ -438,7 +456,7 @@ function Atmosphere() {
           <Eyebrow>Atmosphere</Eyebrow>
           <motion.h2
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
-            className="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1] text-balance"
+            className="display-2 text-balance"
           >
             Crafted to <span className="italic text-gold">linger</span> over.
           </motion.h2>
@@ -476,7 +494,7 @@ function Reviews() {
   return (
     <Section id="reviews" eyebrow="Guest Reviews" className="bg-card/40 border-y border-border">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-balance">
+        <h2 className="display-2 text-balance">
           Words from our <span className="italic text-gold">guests.</span>
         </h2>
         <div className="flex items-center gap-3 text-sm text-muted-foreground">
@@ -520,7 +538,7 @@ function Visit() {
     <Section id="visit" eyebrow="Visit Us">
       <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
         <div className="lg:col-span-5">
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1] text-balance">
+          <h2 className="display-2 text-balance">
             Come <span className="italic text-gold">find</span> us.
           </h2>
           <div className="mt-6 gold-divider w-24" />
@@ -607,7 +625,10 @@ function Footer() {
       <div className="container-x py-16 md:py-20">
         <div className="grid md:grid-cols-12 gap-10 md:gap-8">
           <div className="md:col-span-4">
-            <Logo className="h-14 w-auto" />
+            <div className="flex items-center gap-4">
+              <Logo size={64} variant="hero" />
+              <span className="font-display text-xl tracking-[0.18em] uppercase">Den Culture</span>
+            </div>
 
             <p className="mt-6 text-sm text-muted-foreground leading-relaxed max-w-sm">
               Den Culture Café is a modern destination in Saravanampatti, Coimbatore, designed for meaningful conversations, memorable experiences, and a welcoming community atmosphere.
