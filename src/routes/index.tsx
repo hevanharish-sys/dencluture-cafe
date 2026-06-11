@@ -16,6 +16,7 @@ import img6 from "@/assets/cafe/image-6.asset.json";
 import img7 from "@/assets/cafe/image-7.asset.json";
 import img8 from "@/assets/cafe/image-8.asset.json";
 import img9 from "@/assets/cafe/image-9.asset.json";
+import logoAsset from "@/assets/cafe/logo.asset.json";
 
 const exterior_night = img1.url;   // night exterior w/ string lights & sign
 const exterior_day_close = img2.url; // day exterior closeup
