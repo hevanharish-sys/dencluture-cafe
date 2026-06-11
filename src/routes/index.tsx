@@ -16,6 +16,7 @@ import img6 from "@/assets/cafe/image-6.asset.json";
 import img7 from "@/assets/cafe/image-7.asset.json";
 import img8 from "@/assets/cafe/image-8.asset.json";
 import img9 from "@/assets/cafe/image-9.asset.json";
+import logoAsset from "@/assets/cafe/logo.asset.json";
 
 const exterior_night = img1.url;   // night exterior w/ string lights & sign
 const exterior_day_close = img2.url; // day exterior closeup
@@ -91,13 +92,10 @@ function Nav() {
   return (
     <header className={`fixed top-0 inset-x-0 z-40 transition-all duration-500 ${scrolled ? "bg-ink/85 backdrop-blur-md border-b border-border" : "bg-transparent"}`}>
       <div className="container-x flex items-center justify-between h-16 md:h-20">
-        <a href="#top" className="flex items-center gap-2.5 min-w-0">
-          <Logo className="h-9 w-9 shrink-0" />
-          <div className="leading-tight min-w-0">
-            <div className="font-display text-lg md:text-xl tracking-wider text-foreground truncate">DEN CULTURE</div>
-            <div className="text-[10px] tracking-[0.25em] text-gold/80 uppercase">Café</div>
-          </div>
+        <a href="#top" className="flex items-center min-w-0">
+          <Logo className="h-10 md:h-12 w-auto shrink-0" />
         </a>
+
         <nav className="hidden md:flex items-center gap-8">
           {links.map((l) => (
             <a key={l.href} href={l.href} className="text-sm text-muted-foreground hover:text-gold transition-colors">{l.label}</a>
@@ -137,11 +135,14 @@ function Nav() {
 
 function Logo({ className = "" }: { className?: string }) {
   return (
-    <div className={`relative grid place-items-center rounded-full border border-gold/60 bg-ink ${className}`}>
-      <span className="font-display text-gold text-base leading-none translate-y-[1px]">DC</span>
-    </div>
+    <img
+      src={logoAsset.url}
+      alt="Den Culture Café logo"
+      className={`object-contain ${className}`}
+    />
   );
 }
+
 
 /* ---------------- HERO ---------------- */
 function Hero() {
@@ -157,7 +158,7 @@ function Hero() {
         className="relative z-10 container-x text-center py-32"
       >
         <motion.div variants={fadeUp} className="mx-auto mb-8 flex flex-col items-center gap-4">
-          <Logo className="h-16 w-16" />
+          <Logo className="h-24 md:h-28 w-auto" />
         </motion.div>
 
         <motion.div variants={fadeUp} className="inline-flex items-center gap-2 text-[11px] md:text-xs tracking-[0.3em] uppercase text-gold/90 mb-6">
@@ -606,13 +607,8 @@ function Footer() {
       <div className="container-x py-16 md:py-20">
         <div className="grid md:grid-cols-12 gap-10 md:gap-8">
           <div className="md:col-span-4">
-            <div className="flex items-center gap-3">
-              <Logo className="h-10 w-10" />
-              <div>
-                <div className="font-display text-xl tracking-wider">DEN CULTURE</div>
-                <div className="text-[10px] tracking-[0.25em] text-gold/80 uppercase">Café</div>
-              </div>
-            </div>
+            <Logo className="h-14 w-auto" />
+
             <p className="mt-6 text-sm text-muted-foreground leading-relaxed max-w-sm">
               Den Culture Café is a modern destination in Saravanampatti, Coimbatore, designed for meaningful conversations, memorable experiences, and a welcoming community atmosphere.
             </p>
