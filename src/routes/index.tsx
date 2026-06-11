@@ -138,11 +138,14 @@ function Nav() {
 
 function Logo({ className = "" }: { className?: string }) {
   return (
-    <div className={`relative grid place-items-center rounded-full border border-gold/60 bg-ink ${className}`}>
-      <span className="font-display text-gold text-base leading-none translate-y-[1px]">DC</span>
-    </div>
+    <img
+      src={logoAsset.url}
+      alt="Den Culture Café logo"
+      className={`object-contain ${className}`}
+    />
   );
 }
+
 
 /* ---------------- HERO ---------------- */
 function Hero() {
