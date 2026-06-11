@@ -176,7 +176,7 @@ function Hero() {
         className="relative z-10 container-x text-center py-32"
       >
         <motion.div variants={fadeUp} className="mx-auto mb-8 flex flex-col items-center gap-4">
-          <Logo className="h-24 md:h-28 w-auto" />
+          <Logo size={120} variant="hero" />
         </motion.div>
 
         <motion.div variants={fadeUp} className="inline-flex items-center gap-2 text-[11px] md:text-xs tracking-[0.3em] uppercase text-gold/90 mb-6">
