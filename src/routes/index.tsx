@@ -92,9 +92,11 @@ function Nav() {
   return (
     <header className={`fixed top-0 inset-x-0 z-40 transition-all duration-500 ${scrolled ? "bg-ink/85 backdrop-blur-md border-b border-border" : "bg-transparent"}`}>
       <div className="container-x flex items-center justify-between h-16 md:h-20">
-        <a href="#top" className="flex items-center min-w-0">
-          <Logo className="h-10 md:h-12 w-auto shrink-0" />
+        <a href="#top" className="flex items-center gap-3 min-w-0">
+          <Logo size={44} />
+          <span className="font-display text-base md:text-lg tracking-[0.18em] uppercase text-foreground/90 hidden sm:inline">Den Culture</span>
         </a>
+
 
         <nav className="hidden md:flex items-center gap-8">
           {links.map((l) => (
