@@ -607,13 +607,8 @@ function Footer() {
       <div className="container-x py-16 md:py-20">
         <div className="grid md:grid-cols-12 gap-10 md:gap-8">
           <div className="md:col-span-4">
-            <div className="flex items-center gap-3">
-              <Logo className="h-10 w-10" />
-              <div>
-                <div className="font-display text-xl tracking-wider">DEN CULTURE</div>
-                <div className="text-[10px] tracking-[0.25em] text-gold/80 uppercase">Café</div>
-              </div>
-            </div>
+            <Logo className="h-14 w-auto" />
+
             <p className="mt-6 text-sm text-muted-foreground leading-relaxed max-w-sm">
               Den Culture Café is a modern destination in Saravanampatti, Coimbatore, designed for meaningful conversations, memorable experiences, and a welcoming community atmosphere.
             </p>
