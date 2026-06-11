@@ -133,15 +133,31 @@ function Nav() {
   );
 }
 
-function Logo({ className = "" }: { className?: string }) {
+function Logo({ size = 48, variant = "default" }: { size?: number; variant?: "default" | "hero" }) {
+  const ring = variant === "hero"
+    ? "ring-1 ring-gold/50 shadow-[0_0_60px_-10px_oklch(0.8_0.13_82/0.55)]"
+    : "ring-1 ring-gold/40";
   return (
-    <img
-      src={logoAsset.url}
-      alt="Den Culture Café logo"
-      className={`object-contain ${className}`}
-    />
+    <span
+      aria-label="Den Culture Café"
+      style={{ width: size, height: size }}
+      className={`relative inline-grid place-items-center rounded-full bg-ink ${ring} overflow-hidden shrink-0`}
+    >
+      <span className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_30%,oklch(0.22_0.01_60),oklch(0.09_0.004_60))]" />
+      <img
+        src={logoAsset.url}
+        alt="Den Culture Café logo"
+        loading="eager"
+        decoding="async"
+        className="relative w-[78%] h-[78%] object-contain"
+      />
+      {variant === "hero" && (
+        <span className="absolute inset-[-1px] rounded-full ring-1 ring-gold/20" />
+      )}
+    </span>
   );
 }
+
 
 
 /* ---------------- HERO ---------------- */
