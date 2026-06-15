@@ -245,7 +245,7 @@ function Nav() {
                 <div className="flex items-start gap-3 text-sm text-muted-foreground">
                   <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
                   <div>
-                    <p className="text-foreground/90">Open daily · 11:00 AM – 11:00 PM</p>
+                    <p className="text-foreground/90">Open daily · 9:00 AM – 12:00 AM</p>
                     <p className="mt-1 text-xs">Saravanampatti, Coimbatore</p>
                   </div>
                 </div>
@@ -293,7 +293,7 @@ function Logo({ className = "" }: { className?: string }) {
 /* ---------------- HERO ---------------- */
 const HERO_STATS = [
   { icon: Star, label: "4.8 on Google", accent: true },
-  { icon: Clock, label: "11 AM – 11 PM daily" },
+  { icon: Clock, label: "9 AM – 12 AM daily" },
   { icon: MapPin, label: "Saravanampatti" },
   { icon: Leaf, label: "Outdoor courtyard" },
 ] as const;
@@ -487,7 +487,7 @@ function HeroVisual({ compact = false }: { compact?: boolean }) {
         <div className="flex items-start justify-between gap-3">
           <div>
             <p className="text-[10px] tracking-[0.28em] uppercase text-gold/85">Open daily</p>
-            <p className="mt-1 font-display text-2xl text-foreground">11:00 AM – 11:00 PM</p>
+            <p className="mt-1 font-display text-2xl text-foreground">9:00 AM – 12:00 AM</p>
           </div>
           <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gold/30 bg-gold/10">
             <Clock className="h-4 w-4 text-gold" strokeWidth={1.5} />
@@ -1638,7 +1638,7 @@ const VISIT_DETAILS = [
   {
     icon: Clock,
     title: "Hours",
-    lines: ["Monday – Sunday", "11:00 AM – 11:00 PM"],
+    lines: ["Monday – Sunday", "9:00 AM – 12:00 AM"],
     note: "Open every day",
   },
   {
@@ -1993,9 +1993,9 @@ function Footer() {
             <FooterTitle>Hours</FooterTitle>
             <ul className="space-y-2.5 text-sm text-muted-foreground">
               {[
-                ["Mon – Fri", "11:00 – 23:00"],
-                ["Saturday", "11:00 – 23:00"],
-                ["Sunday", "11:00 – 23:00"],
+                ["Mon – Fri", "09:00 – 00:00"],
+                ["Saturday", "09:00 – 00:00"],
+                ["Sunday", "09:00 – 00:00"],
               ].map(([day, time], i) => (
                 <motion.li
                   key={day}
