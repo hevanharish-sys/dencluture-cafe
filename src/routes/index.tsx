@@ -326,16 +326,17 @@ function Hero() {
           >
             <motion.div variants={fadeUp} className="mb-5 flex items-center gap-3 sm:mb-6">
               <span className="h-px w-10 bg-gold/70" />
-              <span className="text-[10px] tracking-[0.32em] uppercase text-gold/90 sm:text-[11px]">
+              <span className="hero-eyebrow text-gold/90">
                 Premium café · Coimbatore
               </span>
             </motion.div>
 
-            <motion.h1 variants={fadeUp} className="display-1 max-w-[11ch] text-balance text-left">
-              Where Coffee <span className="italic text-gold">Meets</span> Culture
+            <motion.h1 variants={fadeUp} className="hero-title max-w-[11ch] text-balance text-left text-foreground">
+              Where Coffee{" "}
+              <span className="italic font-medium text-gold">Meets</span> Culture
             </motion.h1>
 
-            <motion.p variants={fadeUp} className="lead mt-5 max-w-lg text-left text-pretty sm:mt-6">
+            <motion.p variants={fadeUp} className="hero-lead mt-5 max-w-lg text-left text-pretty sm:mt-6">
               An open-air sanctuary for handcrafted coffee, honest plates, and evenings lit by string lights and good conversation.
             </motion.p>
 
@@ -374,7 +375,7 @@ function Hero() {
                     className={`mb-2 h-4 w-4 ${accent ? "fill-gold text-gold" : "text-gold"}`}
                     strokeWidth={1.5}
                   />
-                  <p className="text-[11px] leading-snug text-foreground/82 sm:text-xs">{label}</p>
+                  <p className="text-[11px] leading-snug tracking-[0.02em] text-foreground/82 sm:text-xs">{label}</p>
                 </div>
               ))}
             </motion.div>
@@ -430,7 +431,7 @@ function HeroVisual({ compact = false }: { compact?: boolean }) {
           <img src={interior_lights} alt="Courtyard string lights" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-transparent to-transparent" />
           <div className="absolute bottom-3 left-3 right-3 rounded-lg border border-border/70 bg-ink/80 px-3 py-2 backdrop-blur-md">
-            <p className="text-[10px] tracking-[0.22em] uppercase text-gold/85">Courtyard nights</p>
+            <p className="hero-eyebrow text-[10px] tracking-[0.22em] text-gold/85">Courtyard nights</p>
           </div>
         </div>
         <div className="flex flex-col gap-3">
@@ -444,7 +445,7 @@ function HeroVisual({ compact = false }: { compact?: boolean }) {
                 <Star key={i} className="h-3.5 w-3.5 fill-gold text-gold" />
               ))}
             </div>
-            <p className="mt-2 font-display text-lg text-foreground">Guest favourite</p>
+            <p className="hero-caption mt-2 text-foreground">Guest favourite</p>
             <p className="mt-1 text-xs text-muted-foreground">Highly rated on Google</p>
           </div>
         </div>
@@ -466,8 +467,8 @@ function HeroVisual({ compact = false }: { compact?: boolean }) {
           <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-ink/15" />
         </div>
         <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-border/80 bg-ink/82 px-4 py-3 backdrop-blur-md">
-          <p className="text-[10px] tracking-[0.26em] uppercase text-gold/85">Evening atmosphere</p>
-          <p className="mt-1 font-display text-xl text-foreground">Courtyard under the lights</p>
+          <p className="hero-eyebrow text-[10px] tracking-[0.26em] text-gold/85">Evening atmosphere</p>
+          <p className="hero-caption mt-1 text-foreground">Courtyard under the lights</p>
         </div>
       </div>
 
@@ -486,8 +487,8 @@ function HeroVisual({ compact = false }: { compact?: boolean }) {
       >
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className="text-[10px] tracking-[0.28em] uppercase text-gold/85">Open daily</p>
-            <p className="mt-1 font-display text-2xl text-foreground">9:00 AM – 12:00 AM</p>
+            <p className="hero-eyebrow text-[10px] tracking-[0.28em] text-gold/85">Open daily</p>
+            <p className="hero-caption mt-1 text-2xl text-foreground">9:00 AM – 12:00 AM</p>
           </div>
           <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gold/30 bg-gold/10">
             <Clock className="h-4 w-4 text-gold" strokeWidth={1.5} />
