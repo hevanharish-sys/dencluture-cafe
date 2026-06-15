@@ -290,93 +290,331 @@ function Logo({ className = "" }: { className?: string }) {
   );
 }
 
+const heroEase = [0.22, 1, 0.36, 1] as const;
+
+const heroWord = {
+  hidden: { opacity: 0, y: 48, filter: "blur(8px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.85, ease: heroEase },
+  },
+};
+
+const heroFade = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.75, ease: heroEase } },
+};
+
+const heroScale = {
+  hidden: { opacity: 0, scale: 0.92, y: 24 },
+  show: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.8, ease: heroEase } },
+};
+
+const heroStagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.11, delayChildren: 0.15 } },
+};
+
 /* ---------------- HERO ---------------- */
 const HERO_STATS = [
   { icon: Star, label: "4.8 on Google", accent: true },
-  { icon: Clock, label: "9 AM – 12 AM daily" },
-  { icon: MapPin, label: "Saravanampatti" },
-  { icon: Leaf, label: "Outdoor courtyard" },
+  { icon: Clock, label: "9 AM – 12 AM daily", accent: false },
+  { icon: MapPin, label: "Saravanampatti", accent: false },
+  { icon: Leaf, label: "Outdoor courtyard", accent: false },
 ] as const;
 
 function Hero() {
   return (
-    <section id="top" className="relative min-h-[100svh] overflow-hidden">
-      <div className="absolute inset-0">
-        <motion.img
-          src={exterior_night}
-          alt="Den Culture Café at night with warm string lights"
-          initial={{ scale: 1.12 }}
-          animate={{ scale: 1.02 }}
-          transition={{ duration: 2.2, ease: [0.22, 1, 0.36, 1] }}
-          className="h-full w-full object-cover object-[center_28%]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/75 via-ink/50 to-ink" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-ink/20" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,oklch(0.8_0.13_82/0.16),transparent_38%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_88%,oklch(0.8_0.13_82/0.08),transparent_32%)]" />
+    <section id="top" className="relative min-h-[100svh] overflow-hidden bg-ink">
+      <HeroBackground />
+
+      <div className="md:hidden">
+        <HeroMobile />
       </div>
 
-      <div className="relative z-10 container-x flex min-h-[100svh] flex-col justify-center pb-28 pt-28 sm:pb-32 sm:pt-32 md:pb-36">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-14">
+      <div className="hidden md:block">
+        <HeroDesktop />
+      </div>
+    </section>
+  );
+}
+
+function HeroBackground() {
+  return (
+    <div className="absolute inset-0">
+      <motion.img
+        src={exterior_night}
+        alt=""
+        aria-hidden
+        initial={{ scale: 1.14 }}
+        animate={{ scale: 1.05 }}
+        transition={{ duration: 2.8, ease: heroEase }}
+        className="h-full w-full object-cover object-[center_30%]"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/50 to-ink" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/55 to-ink/25 md:bg-gradient-to-r" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_15%,oklch(0.8_0.13_82/0.14),transparent_40%)]" />
+    </div>
+  );
+}
+
+function HeroMobile() {
+  return (
+    <div className="relative z-10 flex min-h-[100svh] flex-col">
+      <div className="relative h-[44svh] min-h-[15.5rem] shrink-0 overflow-hidden">
+        <motion.img
+          src={interior_lights}
+          alt="Den Culture courtyard with string lights"
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 2.2, ease: heroEase }}
+          className="h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/55 via-ink/10 to-ink" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent" />
+
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="absolute inset-x-0 top-20 px-4"
+        >
+          <StringLightRow count={14} />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: -12 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.35 }}
+          className="absolute bottom-16 left-4"
+        >
+          <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ink/75 px-3 py-1.5 text-[10px] tracking-[0.18em] uppercase text-gold backdrop-blur-md">
+            <Clock className="h-3 w-3" />
+            9 AM – 12 AM
+          </span>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 12 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="absolute bottom-16 right-4 flex items-center gap-1.5 rounded-full border border-border/80 bg-ink/75 px-3 py-1.5 backdrop-blur-md"
+        >
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star key={i} className="h-3 w-3 fill-gold text-gold" />
+          ))}
+          <span className="text-xs font-medium text-foreground">4.8</span>
+        </motion.div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.85, ease: heroEase }}
+        className="relative -mt-10 flex flex-1 flex-col rounded-t-[1.75rem] border border-b-0 border-gold/20 bg-ink/92 px-4 pb-8 pt-6 backdrop-blur-xl sm:px-5"
+      >
+        <div className="pointer-events-none absolute inset-x-8 top-3 h-1 rounded-full bg-foreground/15" />
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mb-5 flex justify-center"
+        >
+          <Logo className="h-10" />
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="hero-eyebrow text-center text-gold/90"
+        >
+          Premium café · Coimbatore
+        </motion.p>
+
+        <motion.h1
+          initial="hidden"
+          animate="show"
+          variants={heroStagger}
+          className="hero-title mt-3 text-center text-[clamp(2.35rem,9vw,3.25rem)] leading-[0.95] text-foreground"
+        >
+          <motion.span variants={heroWord} className="block">
+            Where Coffee
+          </motion.span>
+          <motion.span variants={heroWord} className="block">
+            <span className="italic text-gold">Meets</span> Culture
+          </motion.span>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="hero-lead mx-auto mt-4 max-w-sm text-center text-pretty"
+        >
+          Handcrafted coffee, honest plates, and courtyard evenings in Saravanampatti.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="mt-5 grid grid-cols-2 gap-2"
+        >
+          <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border">
+            <img src={food_spread} alt="Fresh food" className="h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent" />
+            <span className="absolute bottom-2 left-2 text-[9px] tracking-[0.16em] uppercase text-gold/90">Kitchen</span>
+          </div>
+          <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border">
+            <img src={food_fork} alt="Signature dish" className="h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent" />
+            <span className="absolute bottom-2 left-2 text-[9px] tracking-[0.16em] uppercase text-gold/90">Plates</span>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="no-scrollbar -mx-4 mt-5 flex snap-x snap-mandatory gap-2.5 overflow-x-auto px-4"
+        >
+          {HERO_STATS.map(({ icon: Icon, label, accent }, index) => (
+            <motion.div
+              key={label}
+              initial={{ opacity: 0, x: 16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.45, delay: 0.55 + index * 0.06 }}
+              className="min-w-[9.5rem] shrink-0 snap-start rounded-xl border border-border/80 bg-background/25 px-3.5 py-3 backdrop-blur-sm"
+            >
+              <Icon
+                className={`mb-2 h-4 w-4 ${accent ? "fill-gold text-gold" : "text-gold"}`}
+                strokeWidth={1.5}
+              />
+              <p className="text-[11px] leading-snug text-foreground/88">{label}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.65 }}
+          className="mt-6 grid gap-2.5"
+        >
+          <a
+            href="#visit"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3.5 text-xs tracking-[0.16em] uppercase text-primary-foreground shadow-[0_14px_40px_-14px_oklch(0.8_0.13_82/0.55)]"
+          >
+            Plan Your Visit
+            <ArrowRight className="h-4 w-4" />
+          </a>
+          <a
+            href={MAPS}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-foreground/25 bg-foreground/[0.04] px-6 py-3.5 text-xs tracking-[0.16em] uppercase text-foreground"
+          >
+            <Navigation className="h-4 w-4" />
+            Get Directions
+          </a>
+        </motion.div>
+
+        <motion.a
+          href="#about"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9 }}
+          className="mt-6 flex flex-col items-center gap-2 text-[10px] tracking-[0.24em] uppercase text-foreground/45"
+        >
+          Explore more
+          <motion.span
+            animate={{ y: [0, 5, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            className="h-6 w-px bg-gradient-to-b from-gold/60 to-transparent"
+          />
+        </motion.a>
+      </motion.div>
+    </div>
+  );
+}
+
+function HeroDesktop() {
+  return (
+    <>
+      <div className="relative z-10 container-x flex min-h-[100svh] flex-col justify-center pb-12 pt-32">
+        <div className="grid items-end gap-8 lg:gap-12 md:grid-cols-12">
           <motion.div
             initial="hidden"
             animate="show"
-            variants={{ show: { transition: { staggerChildren: 0.09, delayChildren: 0.12 } } }}
-            className="lg:col-span-6 xl:col-span-5"
+            variants={heroStagger}
+            className="md:col-span-5 lg:col-span-5"
           >
-            <motion.div variants={fadeUp} className="mb-5 flex items-center gap-3 sm:mb-6">
+            <motion.div variants={heroFade} className="mb-5 flex items-center gap-3 sm:mb-6">
               <span className="h-px w-10 bg-gold/70" />
-              <span className="hero-eyebrow text-gold/90">
-                Premium café · Coimbatore
-              </span>
+              <span className="hero-eyebrow text-gold/90">Premium café · Coimbatore</span>
             </motion.div>
 
-            <motion.h1 variants={fadeUp} className="hero-title max-w-[11ch] text-balance text-left text-foreground">
-              Where Coffee{" "}
-              <span className="italic font-medium text-gold">Meets</span> Culture
+            <motion.h1 variants={heroStagger} className="hero-title text-left text-foreground">
+              <motion.span variants={heroWord} className="block">
+                Where
+              </motion.span>
+              <motion.span variants={heroWord} className="block">
+                Coffee
+              </motion.span>
+              <motion.span variants={heroWord} className="block italic text-gold">
+                Meets
+              </motion.span>
+              <motion.span variants={heroWord} className="block">
+                Culture
+              </motion.span>
             </motion.h1>
 
-            <motion.p variants={fadeUp} className="hero-lead mt-5 max-w-lg text-left text-pretty sm:mt-6">
-              An open-air sanctuary for handcrafted coffee, honest plates, and evenings lit by string lights and good conversation.
+            <motion.p variants={heroFade} className="hero-lead mt-5 max-w-md text-left text-pretty sm:mt-6">
+              An open-air sanctuary for handcrafted coffee, honest plates, and evenings lit by string lights and good
+              conversation.
             </motion.p>
 
-            <motion.div
-              variants={fadeUp}
-              className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center"
-            >
-              <a
+            <motion.div variants={heroFade} className="mt-7 grid max-w-md grid-cols-2 gap-3 sm:mt-8">
+              <motion.a
                 href="#visit"
-                className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-gold px-7 py-3.5 text-xs tracking-[0.18em] uppercase text-primary-foreground transition-all hover:bg-gold-soft hover:shadow-[0_18px_48px_-16px_oklch(0.8_0.13_82/0.75)]"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3.5 text-xs tracking-[0.16em] uppercase text-primary-foreground shadow-[0_16px_44px_-14px_oklch(0.8_0.13_82/0.6)]"
               >
                 Plan Your Visit
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href={MAPS}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 rounded-full border border-foreground/20 bg-foreground/[0.03] px-7 py-3.5 text-xs tracking-[0.18em] uppercase text-foreground backdrop-blur-sm transition-all hover:border-gold/45 hover:text-gold"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-foreground/25 bg-foreground/[0.03] px-6 py-3.5 text-xs tracking-[0.16em] uppercase text-foreground backdrop-blur-sm transition-colors hover:border-gold/45 hover:text-gold"
               >
                 <Navigation className="h-4 w-4" />
                 Directions
-              </a>
+              </motion.a>
             </motion.div>
 
-            <motion.div
-              variants={fadeUp}
-              className="mt-8 grid grid-cols-2 gap-2 sm:mt-10 sm:max-w-xl sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4"
-            >
+            <motion.div variants={heroStagger} className="mt-10 grid grid-cols-4 gap-2">
               {HERO_STATS.map(({ icon: Icon, label, accent }) => (
-                <div
+                <motion.div
                   key={label}
-                  className="rounded-xl border border-border/80 bg-ink/45 px-3 py-3 backdrop-blur-md sm:px-3.5"
+                  variants={heroScale}
+                  whileHover={{ y: -3 }}
+                  className="rounded-xl border border-border/80 bg-ink/50 px-3 py-3 backdrop-blur-md"
                 >
                   <Icon
                     className={`mb-2 h-4 w-4 ${accent ? "fill-gold text-gold" : "text-gold"}`}
                     strokeWidth={1.5}
                   />
-                  <p className="text-[11px] leading-snug tracking-[0.02em] text-foreground/82 sm:text-xs">{label}</p>
-                </div>
+                  <p className="text-[11px] leading-snug text-foreground/85 lg:text-xs">{label}</p>
+                </motion.div>
               ))}
             </motion.div>
           </motion.div>
@@ -384,113 +622,82 @@ function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:col-span-6 lg:block xl:col-span-7"
+            transition={{ duration: 1, delay: 0.3, ease: heroEase }}
+            className="md:col-span-7 lg:col-span-7"
           >
-            <HeroVisual />
+            <HeroVisualStack />
           </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.55 }}
-          className="mt-10 lg:hidden"
-        >
-          <HeroVisual compact />
-        </motion.div>
       </div>
 
       <motion.a
         href="#about"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-3 text-[10px] tracking-[0.28em] uppercase text-foreground/55 transition-colors hover:text-gold sm:bottom-8"
+        transition={{ delay: 1.1, duration: 0.7 }}
+        className="absolute bottom-6 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-2 text-[10px] tracking-[0.26em] uppercase text-foreground/50 transition-colors hover:text-gold md:flex"
       >
-        <span>Discover more</span>
+        Scroll
         <motion.span
-          animate={{ y: [0, 6, 0], opacity: [0.45, 1, 0.45] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-ink/35 backdrop-blur-sm"
-        >
-          <span className="h-2 w-2 rounded-full bg-gold/80" />
-        </motion.span>
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          className="h-7 w-px bg-gradient-to-b from-gold/70 to-transparent"
+        />
       </motion.a>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-24 bg-gradient-to-t from-background to-transparent" />
-    </section>
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-20 bg-gradient-to-t from-background to-transparent" />
+    </>
   );
 }
 
-function HeroVisual({ compact = false }: { compact?: boolean }) {
-  if (compact) {
-    return (
-      <div className="grid grid-cols-2 gap-3">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-border">
-          <img src={interior_lights} alt="Courtyard string lights" className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-transparent to-transparent" />
-          <div className="absolute bottom-3 left-3 right-3 rounded-lg border border-border/70 bg-ink/80 px-3 py-2 backdrop-blur-md">
-            <p className="hero-eyebrow text-[10px] tracking-[0.22em] text-gold/85">Courtyard nights</p>
-          </div>
-        </div>
-        <div className="flex flex-col gap-3">
-          <div className="relative aspect-square overflow-hidden rounded-xl border border-border">
-            <img src={food_spread} alt="Fresh food spread" className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent" />
-          </div>
-          <div className="rounded-xl border border-border bg-ink/55 p-4 backdrop-blur-md">
-            <div className="flex items-center gap-1">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-3.5 w-3.5 fill-gold text-gold" />
-              ))}
-            </div>
-            <p className="hero-caption mt-2 text-foreground">Guest favourite</p>
-            <p className="mt-1 text-xs text-muted-foreground">Highly rated on Google</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
+function HeroVisualStack() {
   return (
-    <div className="relative mx-auto h-[min(78vh,42rem)] max-w-[36rem] xl:max-w-none">
-      <div className="absolute left-0 top-8 z-10 w-[58%] overflow-hidden rounded-2xl border border-border shadow-[0_30px_80px_-30px_oklch(0_0_0/0.95)]">
-        <div className="absolute left-0 top-0 z-10 h-12 w-12 border-l border-t border-gold/50" />
-        <div className="absolute bottom-0 right-0 z-10 h-12 w-12 border-b border-r border-gold/50" />
+    <div className="relative mx-auto h-[min(72vh,38rem)] w-full max-w-[36rem] lg:max-w-none xl:h-[min(78vh,42rem)]">
+      <motion.div
+        initial={{ opacity: 0, y: 32 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.4, ease: heroEase }}
+        className="absolute left-0 top-6 z-10 w-[56%] overflow-hidden rounded-2xl border border-border shadow-[0_30px_80px_-30px_oklch(0_0_0/0.95)] lg:top-8"
+      >
+        <div className="absolute left-0 top-0 z-10 h-11 w-11 border-l border-t border-gold/50 lg:h-12 lg:w-12" />
         <div className="aspect-[4/5]">
           <img
             src={interior_lights}
             alt="String lights over Den Culture courtyard"
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-ink/15" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-ink/10" />
         </div>
         <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-border/80 bg-ink/82 px-4 py-3 backdrop-blur-md">
-          <p className="hero-eyebrow text-[10px] tracking-[0.26em] text-gold/85">Evening atmosphere</p>
+          <p className="hero-eyebrow text-[9px] tracking-[0.26em] text-gold/85 sm:text-[10px]">Evening atmosphere</p>
           <p className="hero-caption mt-1 text-foreground">Courtyard under the lights</p>
         </div>
-      </div>
-
-      <div className="absolute right-0 top-0 z-20 w-[46%] overflow-hidden rounded-2xl border border-border shadow-[0_24px_70px_-28px_oklch(0_0_0/0.9)]">
-        <div className="aspect-[3/4]">
-          <img src={food_spread} alt="Fresh food at Den Culture" className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent" />
-        </div>
-      </div>
+      </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.7 }}
-        className="absolute bottom-6 right-[8%] z-30 w-[52%] rounded-2xl border border-gold/25 bg-ink/90 p-5 backdrop-blur-xl"
+        transition={{ duration: 0.9, delay: 0.5, ease: heroEase }}
+        className="absolute right-0 top-0 z-20 w-[48%] overflow-hidden rounded-2xl border border-border shadow-[0_24px_70px_-28px_oklch(0_0_0/0.9)]"
+      >
+        <div className="aspect-[3/4]">
+          <img src={food_spread} alt="Fresh food at Den Culture" className="h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/65 to-transparent" />
+        </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.75, delay: 0.65, ease: heroEase }}
+        className="absolute bottom-4 right-[6%] z-30 w-[54%] rounded-2xl border border-gold/25 bg-ink/92 p-4 backdrop-blur-xl sm:bottom-6 sm:p-5"
       >
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className="hero-eyebrow text-[10px] tracking-[0.28em] text-gold/85">Open daily</p>
-            <p className="hero-caption mt-1 text-2xl text-foreground">9:00 AM – 12:00 AM</p>
+            <p className="hero-eyebrow text-[9px] tracking-[0.28em] text-gold/85 sm:text-[10px]">Open daily</p>
+            <p className="hero-caption mt-1 text-xl text-foreground sm:text-2xl">9:00 AM – 12:00 AM</p>
           </div>
-          <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gold/30 bg-gold/10">
+          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-gold/30 bg-gold/10 sm:h-11 sm:w-11">
             <Clock className="h-4 w-4 text-gold" strokeWidth={1.5} />
           </div>
         </div>
@@ -503,12 +710,6 @@ function HeroVisual({ compact = false }: { compact?: boolean }) {
           <p className="text-xs text-muted-foreground">Loved by guests on Google</p>
         </div>
       </motion.div>
-
-      <motion.div
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute left-[12%] top-0 z-0 hidden h-24 w-24 rounded-full border border-gold/15 bg-gold/[0.04] blur-2xl xl:block"
-      />
     </div>
   );
 }

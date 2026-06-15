@@ -38,7 +38,7 @@
 
   --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
   --font-body: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
-  --font-hero: "Cormorant Garamond", "Fraunces", ui-serif, Georgia, serif;
+  --font-hero: "Instrument Serif", "Fraunces", ui-serif, Georgia, serif;
 }
 
 :root {
@@ -148,35 +148,36 @@
 
 @utility hero-title {
   font-family: var(--font-hero);
-  font-size: clamp(3rem, 2rem + 5.5vw, 6.75rem);
+  font-size: clamp(2.85rem, 1.85rem + 5.2vw, 6.25rem);
   font-weight: 400;
-  line-height: 0.92;
+  line-height: 0.94;
   letter-spacing: -0.015em;
+  font-feature-settings: "liga" 1, "kern" 1;
 }
 
 @utility hero-eyebrow {
   font-family: var(--font-body);
   font-size: var(--fs-eyebrow);
   font-weight: 500;
-  letter-spacing: 0.34em;
+  letter-spacing: 0.38em;
   text-transform: uppercase;
 }
 
 @utility hero-lead {
   font-family: var(--font-body);
   font-size: var(--fs-lead);
-  line-height: 1.65;
+  line-height: 1.7;
   font-weight: 300;
-  letter-spacing: 0.008em;
-  color: oklch(0.82 0.012 80);
+  letter-spacing: 0.01em;
+  color: oklch(0.8 0.014 82);
 }
 
 @utility hero-caption {
   font-family: var(--font-hero);
-  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.2rem, 1.05rem + 0.55vw, 1.625rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.012em;
 }
 
 @utility display-2 {
